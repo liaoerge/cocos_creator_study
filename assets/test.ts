@@ -1,4 +1,4 @@
-import { _decorator, Component, find, Label,Color,Vec3 ,UITransform ,SpriteAtlas, Node, Sprite, Prefab, instantiate, loader, resources, SpriteFrame,EventMouse } from 'cc';
+import { _decorator, Component, find, Label,Color,Vec3 ,UITransform ,SpriteAtlas, Node, Sprite, Prefab, instantiate, resources, SpriteFrame,EventMouse,KeyCode,Input,input,EventKeyboard } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('test')
@@ -13,6 +13,11 @@ export class test extends Component {
     //预设体
     @property(Prefab)
     Pre:Prefab = null;
+    private isWPressed: boolean = false;
+    private isSPressed: boolean = false;
+    private isAPressed: boolean = false;
+    private isDPressed: boolean = false;
+
 
     //最开始初始化调用
     onLoad() {
@@ -103,7 +108,7 @@ export class test extends Component {
         // node.setParent(this.node);
         
         //动态加载资源
-        let self = this;
+        // let self = this;
         // resources.load("test/land/spriteFrame", SpriteFrame, (err: Error, sp: SpriteFrame) => {
         //     if (!err) {
         //         // 获取或添加 Sprite 组件
@@ -167,17 +172,100 @@ export class test extends Component {
         // MOUSE_LEAVE鼠标离开
         // MOUSE_UP鼠标抬起
         // MOUSE_WHEEL鼠标滚轮
-        this.node.on(Node.EventType.MOUSE_DOWN,function(event){
-            console.log("鼠标点击了" + event.getLocation());
-            if (event.getButton() == EventMouse.BUTTON_RIGHT){
-                console.log("鼠标点击了右键");
-            }
+        // this.node.on(Node.EventType.MOUSE_DOWN,function(event){
+        //     console.log("鼠标点击了" + event.getLocation());
+        //     if (event.getButton() == EventMouse.BUTTON_RIGHT){
+        //         console.log("鼠标点击了右键");
+        //     }
+        // });
+
+        //监听键盘事件
+        // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
+        // input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
+
+        // 触摸事件
+        //TOUCH_START开始触发
+        //TOUCH_MOVE移动触发
+        //TOUCH_END结束触发
+        //TOUCH_CANCEL异常事件
+        let self = this;//匿名函数调用需要this指向
+        this.node.on(Node.EventType.TOUCH_START,function(event){
+            // console.log("触摸事件" + event.getID()); //通过编码可以获取多个触摸点
+            // self.node.emit("myEvent1");自定义事件调用
+        });
+
+        // 监听自定义事件
+        this.node.on("myEvent1",function(event){ 
+            console.log("自定义事件1");
         });
 
     }
+
+        onKeyDown(event: EventKeyboard) {
+        switch(event.keyCode) {
+            case KeyCode.KEY_A:
+                console.log('A键被按下');
+                this.isAPressed = true;
+                break;
+            case KeyCode.KEY_W:
+                console.log('W键被按下');
+                this.isWPressed = true;
+                break;
+            case KeyCode.KEY_S:
+                console.log('S键被按下');
+                this.isSPressed = true;
+                break;
+            case KeyCode.KEY_D:
+                console.log('D键被按下');
+                this.isDPressed = true;
+                break;
+            case KeyCode.SPACE:
+                console.log('空格键被按下');
+                break;
+        }
+    }
+
+    onKeyUp(event: EventKeyboard) {
+        console.log("onKeyUp===============================================");
+        switch (event.keyCode) {
+            case KeyCode.KEY_A:
+                this.isAPressed = false; // 松开时重置
+            break;
+            case KeyCode.KEY_W:
+                this.isWPressed = false; // 松开时重置
+            break;
+            case KeyCode.KEY_S:
+                this.isSPressed = false; // 松开时重置
+            break;
+            case KeyCode.KEY_D:
+                this.isDPressed = false; // 松开时重置
+            break;
+        }
+    }
+
     //每帧调用 
     update(deltaTime: number) {
-        
+        // console.log("update================================================");
+        // const bird0_0 = find("Canvas/bg_day/bird0_0");
+        // if (!bird0_0) return;
+        // const currentPos = bird0_0.getPosition();
+        // let newX = currentPos.x;
+        // let newY = currentPos.y;
+        // const speed = 5;
+
+        // if (this.isAPressed) {
+        //     newX -= speed; // 向左
+        // }
+        // if (this.isDPressed) {
+        //     newX += speed; // 向右
+        // }
+        // if (this.isWPressed) {
+        //     newY += speed; // 向上
+        // }
+        // if (this.isSPressed) {
+        //     newY -= speed; // 向下
+        // }
+        // bird0_0.setPosition(newX, newY);
     }
     
     lateUpdate(){
