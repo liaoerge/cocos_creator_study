@@ -25,7 +25,8 @@ export class pengzhuang extends Component {
             
             console.log('3 - 碰撞监听器已注册');
         } else {
-            console.log('2 - 未找到碰撞组件');
+            // console.log('2 - 未找到碰撞组件');
+            
         }
     }
     start() {
