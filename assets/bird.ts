@@ -1,4 +1,4 @@
-import { _decorator, BoxCollider2D, Collider2D, Component, Contact2DType, ICollisionEvent, Node, RigidBody, RigidBody2D, Vec2, Vec3 } from 'cc';
+import { _decorator, BoxCollider2D, Collider2D, Component, Contact2DType, director, ICollisionEvent, Node, PhysicsSystem2D, RigidBody, RigidBody2D, v2, v3, Vec2, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('bird')
@@ -25,11 +25,18 @@ export class bird extends Component {
 
 
 
+
+    onLoad() {
+
+        }
+
+
+
      onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: any) {
-        console.log('碰撞开始！', selfCollider.tag);
+        // console.log('碰撞开始！', selfCollider.tag);
         const worldManifold = contact.getWorldManifold();
-        console.log("碰撞法线:", worldManifold.normal.x, worldManifold.normal.y);
-        console.log("碰撞点:", worldManifold.points[0]);
+        // console.log("碰撞法线:", worldManifold.normal.x, worldManifold.normal.y);
+        // console.log("碰撞点:", worldManifold.points[0]);
 
 
 

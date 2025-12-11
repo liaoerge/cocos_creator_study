@@ -4,5 +4,12 @@
     "collisionMatrix": {
       "0": 1
     }
+  },
+  "general": {
+    "designResolution": {
+      "width": 1280,
+      "height": 720,
+      "fitHeight": true
+    }
   }
 }
