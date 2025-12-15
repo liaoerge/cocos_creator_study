@@ -46,7 +46,8 @@ export class dongzuo extends Component {
     //     .to(0.5, { opacity: 0 })      // 半透明
     //     .to(0.5, { opacity: 255 })    // 不透明
     //     .union()                      // 组合动作
-    //     .repeatForever()              // 无限重复
+    //     // .repeatForever()              // 无限重复
+    //         .repeat(3)  // 重复3次
     //     .start();
 
     //淡出
@@ -68,28 +69,38 @@ export class dongzuo extends Component {
 
 
     //渐变
-    const sprite = this.node.getComponent(Sprite);
-    if (sprite) {
-        tween(sprite)
-            .to(1, { color: Color.RED })      // 1秒内变成红色
-            .to(1, { color: Color.BLUE })     // 再1秒内变成蓝色
-            .to(1, { color: Color.GREEN })    // 再1秒内变成绿色
-            .to(1, { color: Color.WHITE })    // 最后变回白色
-            .union()
-            .repeatForever()
-            .start();
-    }
+    // const sprite = this.node.getComponent(Sprite);
+    // if (sprite) {
+    //     tween(sprite)
+    //         .to(1, { color: Color.RED })      // 1秒内变成红色
+    //         .to(1, { color: Color.BLUE })     // 再1秒内变成蓝色
+    //         .to(1, { color: Color.GREEN })    // 再1秒内变成绿色
+    //         .to(1, { color: Color.WHITE })    // 最后变回白色
+    //         .union()
+    //         .repeatForever()
+    //         .start();
+    // }
+
+    // // 显示节点
+    // this.node.active = true;
+    // // 隐藏节点：
+    // this.node.active = false;
 
 
-
-
-
-
-
-
-
-
-
+// 并列执行
+    tween(this.node)
+        .parallel(
+            // 垂直跳跃
+            tween(this.node).by(0.5, { position: v3(0, 100, 0) }, { easing: 'quadOut' })
+                            .by(0.5, { position: v3(0, -100, 0) }, { easing: 'quadIn' }),
+            // 同时缩放
+            tween(this.node).to(0.5, { scale: v3(1.2, 1.2, 1) })
+                            .to(0.5, { scale: v3(1, 1, 1) })
+        )
+        .call(() => {
+        console.log("跳跃和缩放动作完成！");
+    })
+        .start();
 
 
 
@@ -120,5 +131,7 @@ export class dongzuo extends Component {
         
     }
 }
+
+
 
 
