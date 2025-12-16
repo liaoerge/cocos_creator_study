@@ -31,7 +31,7 @@ export class shexian extends Component {
 
         // 打出一条射线
         const res = PhysicsSystem2D.instance.raycast(this.node.worldPosition, v3(this.node.x, this.node.y + this.dir.y * 500), ERaycast2DType.Closest);
-        console.log("res.length",res.length)
+        // console.log("res.length",res.length)
         if (res.length > 0){
             this.dir.y *= -1;
         }

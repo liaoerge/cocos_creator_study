@@ -252,7 +252,7 @@ export class test extends Component {
 
     //每帧调用 
     update(deltaTime: number) {
-        console.log("update================================================");
+        // console.log("update================================================");
         const bird0_0 = find("Canvas/bg_day/bird0_0");
         if (!bird0_0) return;
         const currentPos = bird0_0.getPosition();
@@ -283,7 +283,9 @@ export class test extends Component {
         console.log("onDisable");
     }
 
-
+    test(){
+        console.log("test1111111111111");
+    }
 
     //销毁时调用
     protected onDestroy(): void {
